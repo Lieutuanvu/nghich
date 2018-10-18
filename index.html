@@ -11,7 +11,7 @@
 </head>
 <body>
 <div id="hienthi" class="jumbotron text-center">
-  <h1>CHƯƠNG TRÌNH QUAY SỐ TRÚNG THƯỞNG 12A7</h1>
+  <h1>CHƯƠNG TRÌNH QUAY TÊN TRÚNG THƯỞNG 12A7 20 THÁNG 10 NĂM 2018</h1>
 </div>
 <div class="container">
   <div class="jumbotron">
@@ -19,7 +19,7 @@
     <h1 id="dangquay">Xin mời bạn đầu tiên lên quay số!!</h1>
   </div>
 </div>
-<button class="btn btn-danger btn-lg btn-block" onclick="quay()">Quay!!!</button>
+<button id="clickquay" class="btn btn-danger btn-lg btn-block" onclick="quay()">Quay!!!</button>
 </div>
 </body>
 <script>
@@ -27,6 +27,7 @@ var danhsach =["Nguyễn Quang Lộc","Trần Gia Huy","Âu Dương Đức","M�
 var i=-1;
 function quay()
 {
+  $('#clickquay').text('Đang quay...').prop('disabled', true);
   //document.getElementById("hienthi").innerHTML = danhsach[i];
   //swal(danhsach[i]);
   setTimeout(function(){document.getElementById('dangquay').innerHTML=danhsach[Math.floor((Math.random() * 23))]}, 100);
@@ -62,15 +63,17 @@ function quay()
   setTimeout(function(){document.getElementById('dangquay').innerHTML=danhsach[Math.floor((Math.random() * 23))]}, 3100);
   setTimeout(function(){document.getElementById('dangquay').innerHTML=danhsach[Math.floor((Math.random() * 23))]}, 3200);
   setTimeout(function(){document.getElementById('dangquay').innerHTML=danhsach[Math.floor((Math.random() * 23))]}, 3300);
-  setTimeout(function(){document.getElementById('dangquay').innerHTML=danhsach[Math.floor((Math.random() * 23))]}, 3400);
+    setTimeout(function(){document.getElementById('dangquay').innerHTML=danhsach[Math.floor((Math.random() * 23))]}, 3400);
 
   setTimeout(function(){
     swal("Quay thành công, xem ai sẽ có được vinh hạnh tặng quà cho bạn nào!!","","success");
     // { buttons: {xem: true,},})
     // .then((value) => { switch (value) { case "xem": swal('<h3>'+danhsach[i] + ' sẽ lên tặng quà cho bạn!!</h3>');break;}});
     document.getElementById('dangquay').innerHTML=danhsach[i];
+    $('#clickquay').text('Đã quay xong').prop('disabled', true);
 }, 3700);
   if (i==22){i=Math.floor((Math.random() * 23 ));} else {i=i+1;};
+  setTimeout(function(){$('#clickquay').text('Quay!!').prop('disabled', false);}, 10000);
 };
 
 
