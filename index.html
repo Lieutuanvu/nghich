@@ -1,106 +1,162 @@
-<html>
+<html lang="vi">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Mừng ngày Phụ nữ Việt Nam 20/10/2018 - Lớp 12a7</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="author" content="Liêu Tuấn Vũ">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-<style type='text/css'>
-body{
--webkit-touch-callout: none;
--webkit-user-select: none;
--moz-user-select: none;
--ms-user-select: none;
--o-user-select: none;
-user-select: none;
-}
-</style>
-<script type='text/javascript'>
-checkCtrl=false $(&#39;*&#39;).keydown(function(e){
-if(e.keyCode==&#39;17&#39;){ checkCtrl=false  } }).keyup(function(ev){
-if(ev.keyCode==&#39;17&#39;){ checkCtrl=false } }).keydown(function(event){
-if(checkCtrl){
-if(event.keyCode==&#39;85&#39;){ return false; } } })
-</script>
-<script type='text/javascript'>
-//<![CDATA[
-// JavaScript Document
-var message="NoRightClicking"; function defeatIE() {if (document.all) {(message);return false;}} function defeatNS(e) {if (document.layers||(document.getElementById&&!document.all)) { if (e.which==2||e.which==3) {(message);return false;}}} if (document.layers) {document.captureEvents(Event.MOUSEDOWN);document.onmousedown=defeatNS;} else{document.onmouseup=defeatNS;document.oncontextmenu=defeatIE;} document.oncontextmenu=new Function("return false")
-//]]>
-</script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<title id="tieude"> Công cụ xử lí toán học</title>
 </head>
-<body onkeydown="return false">
-<div id="hienthi" class="jumbotron text-center">
-  <h1>CHƯƠNG TRÌNH QUAY TÊN TRÚNG THƯỞNG 12A7 20 THÁNG 10 NĂM 2018</h1>
+<div class="jumbotron">
+  <form id="giaitoan" action="api.getdata.php" method="POST">
+      <div class="form-group">
+            <input id="noidung" name="q" class="form-control" placeholder="Nhập dạng toán vào đây" required=""/>
+      </div>
+      <button id="giai" name="submit" type="submit" value="submit"  class="btn btn-primary">Xử lí</button>
+      <button onclick="reset()" class="btn btn-primary">Viết lại từ đầu</button>
+  </form>
+  <p>Click vào biểu thức bên dưới để xem mẫu nhập</p>
+  <div class="d-flex p-3 bg-secondary text-white">
+  <div class="p-2 bg-white" onclick="chen1()"><img src="https://mathpic.coccoc.com/drivermath?render=a^n"/>|</div>
+  <div class="p-2 bg-white" onclick="chen2()"><img src="https://mathpic.coccoc.com/drivermath?render=%24%7B%7Ba%7D%5Cover%7Bb%7D%7D%24"/>|</div>
+  <div class="p-2 bg-white" onclick="chen3()"><img src="https://mathpic.coccoc.com/drivermath?render=%24a%5E%7B%7B%7B1%7D%5Cover%7Bn%7D%7D%7D%24"/>|</div>
+  <div class="p-2 bg-white" onclick="chen4()"><img src="https://mathpic.coccoc.com/drivermath?render=%24%5Cpi%24"/>|</div>
+  <div class="p-2 bg-white" onclick="chen5()"><img src="https://mathpic.coccoc.com/drivermath?render=%24a%5Cleq%20b%24"/>|</div>
+  <div class="p-2 bg-white" onclick="chen6()"><img src="https://mathpic.coccoc.com/drivermath?render=%24%5Cleft%7C%20a%5Cright%7C%20%24"/>|</div>
+  <div class="p-2 bg-white" onclick="chen7()"><img src="https://mathpic.coccoc.com/drivermath?render=%24%5Csqrt%7Bx%7D%24"/>|</div>
+  <div class="p-2 bg-white" onclick="chen8()"><img src="https://mathpic.coccoc.com/drivermath?render=%24%5Csin%20x%20%5E%5Ccirc%20%24"/>|</div>
+  <div class="p-2 bg-white" onclick="chen9()"><img src="https://mathpic.coccoc.com/drivermath?render=logarit%20c%C6%A1%20s%E1%BB%91%20n%20c%E1%BB%A7a%20a"/>|</div>
+  <div class="p-2 bg-white" onclick="chen10()"><img src="https://mathpic.coccoc.com/drivermath?render=1%20usd%20sang%20vnd"/>|</div>
 </div>
-<div class="container">
-  <div class="jumbotron">
-  <div class="container text-center">
-    <h1 id="dangquay">Xin mời bạn đầu tiên lên quay số!!</h1>
-  </div>
 </div>
-<button id="clickquay" class="btn btn-danger btn-lg btn-block" onclick="quay()">Quay!!!</button>
+<div id="loigiai">
 </div>
-</body>
 <script>
-var danhsach =["Nguyễn Quang Lộc","Trần Gia Huy","Âu Dương Đức","Mạch Tấn An","Trương Minh Trường Huy","Lâm Đào Anh Khoa","Dương Nhật Trường","Trần Thế Thuận","Lý Đức Tiến","Dương Thế Phong","Lâm Hữu Phước","Nguyễn Kỳ Anh","Trần An Khang","Nguyễn Trương Thiên Ân","Ung Tạ Hoàng Tuấn","Dương Nhật Duy","Từ Hữu Đức","Nguyễn Hoàng Thiện","Lê Phú Tân","Mạch Tiến Thắng","Phạm Duy Điển","Võ Hoàng Duy","Liêu Tuấn Vũ","Hồ Huỳnh Phương"];
-danhsach.sort(function() {
-return 0.5 - Math.random();});
-var i=-1;
-function quay()
+function chen1()
 {
-  $('#clickquay').text('Đang quay...').prop('disabled', true);
-  //document.getElementById("hienthi").innerHTML = danhsach[i];
-  //swal(danhsach[i]);
-  setTimeout(function(){document.getElementById('dangquay').innerHTML=danhsach[Math.floor((Math.random() * 24))]}, 100);
-  setTimeout(function(){document.getElementById('dangquay').innerHTML=danhsach[Math.floor((Math.random() * 24))]}, 200);
-  setTimeout(function(){document.getElementById('dangquay').innerHTML=danhsach[Math.floor((Math.random() * 24))]}, 300);
-  setTimeout(function(){document.getElementById('dangquay').innerHTML=danhsach[Math.floor((Math.random() * 24))]}, 400);
-  setTimeout(function(){document.getElementById('dangquay').innerHTML=danhsach[Math.floor((Math.random() * 24))]}, 500);
-  setTimeout(function(){document.getElementById('dangquay').innerHTML=danhsach[Math.floor((Math.random() * 24))]}, 600);
-  setTimeout(function(){document.getElementById('dangquay').innerHTML=danhsach[Math.floor((Math.random() * 24))]}, 700);
-  setTimeout(function(){document.getElementById('dangquay').innerHTML=danhsach[Math.floor((Math.random() * 24))]}, 800);
-  setTimeout(function(){document.getElementById('dangquay').innerHTML=danhsach[Math.floor((Math.random() * 24))]}, 900);
-  setTimeout(function(){document.getElementById('dangquay').innerHTML=danhsach[Math.floor((Math.random() * 24))]}, 1000);
-  setTimeout(function(){document.getElementById('dangquay').innerHTML=danhsach[Math.floor((Math.random() * 24))]}, 1100);
-  setTimeout(function(){document.getElementById('dangquay').innerHTML=danhsach[Math.floor((Math.random() * 24))]}, 1200);
-  setTimeout(function(){document.getElementById('dangquay').innerHTML=danhsach[Math.floor((Math.random() * 24))]}, 1300);
-  setTimeout(function(){document.getElementById('dangquay').innerHTML=danhsach[Math.floor((Math.random() * 24))]}, 1400);
-  setTimeout(function(){document.getElementById('dangquay').innerHTML=danhsach[Math.floor((Math.random() * 24))]}, 1500);
-  setTimeout(function(){document.getElementById('dangquay').innerHTML=danhsach[Math.floor((Math.random() * 24))]}, 1600);
-  setTimeout(function(){document.getElementById('dangquay').innerHTML=danhsach[Math.floor((Math.random() * 24))]}, 1700);
-  setTimeout(function(){document.getElementById('dangquay').innerHTML=danhsach[Math.floor((Math.random() * 24))]}, 1800);
-  setTimeout(function(){document.getElementById('dangquay').innerHTML=danhsach[Math.floor((Math.random() * 24))]}, 1900);
-  setTimeout(function(){document.getElementById('dangquay').innerHTML=danhsach[Math.floor((Math.random() * 24))]}, 2000);
-  setTimeout(function(){document.getElementById('dangquay').innerHTML=danhsach[Math.floor((Math.random() * 24))]}, 2100);
-  setTimeout(function(){document.getElementById('dangquay').innerHTML=danhsach[Math.floor((Math.random() * 24))]}, 2200);
-  setTimeout(function(){document.getElementById('dangquay').innerHTML=danhsach[Math.floor((Math.random() * 24))]}, 2300);
-  setTimeout(function(){document.getElementById('dangquay').innerHTML=danhsach[Math.floor((Math.random() * 24))]}, 2400);
-  setTimeout(function(){document.getElementById('dangquay').innerHTML=danhsach[Math.floor((Math.random() * 24))]}, 2500);
-  setTimeout(function(){document.getElementById('dangquay').innerHTML=danhsach[Math.floor((Math.random() * 24))]}, 2600);
-  setTimeout(function(){document.getElementById('dangquay').innerHTML=danhsach[Math.floor((Math.random() * 24))]}, 2700);
-  setTimeout(function(){document.getElementById('dangquay').innerHTML=danhsach[Math.floor((Math.random() * 24))]}, 2800);
-  setTimeout(function(){document.getElementById('dangquay').innerHTML=danhsach[Math.floor((Math.random() * 24))]}, 2900);
-  setTimeout(function(){document.getElementById('dangquay').innerHTML=danhsach[Math.floor((Math.random() * 24))]}, 3000);
-  setTimeout(function(){document.getElementById('dangquay').innerHTML=danhsach[Math.floor((Math.random() * 24))]}, 3100);
-  setTimeout(function(){document.getElementById('dangquay').innerHTML=danhsach[Math.floor((Math.random() * 24))]}, 3200);
-  setTimeout(function(){document.getElementById('dangquay').innerHTML=danhsach[Math.floor((Math.random() * 24))]}, 3300);
-    setTimeout(function(){document.getElementById('dangquay').innerHTML=danhsach[Math.floor((Math.random() * 24))]}, 3400);
-
-  setTimeout(function(){
-    swal("Quay thành công, xem ai sẽ có được vinh hạnh tặng quà cho bạn nào!!","","success");
-    // { buttons: {xem: true,},})
-    // .then((value) => { switch (value) { case "xem": swal('<h3>'+danhsach[i] + ' sẽ lên tặng quà cho bạn!!</h3>');break;}});
-    document.getElementById('dangquay').innerHTML=danhsach[i];
-    $('#clickquay').text('Đã quay xong').prop('disabled', true);
-}, 3700);
-  if (i==23){i=Math.floor((Math.random() * 24 ));} else {i=i+1;};
-  setTimeout(function(){$('#clickquay').text('Quay!!').prop('disabled', false);}, 10000);
+  var tam = document.getElementById('noidung').value;
+  document.getElementById('noidung').value=tam + "a^n";
 };
-
+function chen2()
+{
+  var tam = document.getElementById('noidung').value;
+  document.getElementById('noidung').value=tam + "a/b";
+};
+function chen3()
+{
+  var tam = document.getElementById('noidung').value;
+  document.getElementById('noidung').value=tam + "sqrt[n]{a}";
+};
+function chen4()
+{
+  var tam = document.getElementById('noidung').value;
+  document.getElementById('noidung').value=tam + "pi";
+};
+function chen5()
+{
+  var tam = document.getElementById('noidung').value;
+  document.getElementById('noidung').value=tam + "a<=b";
+}
+function chen6()
+{
+  var tam = document.getElementById('noidung').value;
+  document.getElementById('noidung').value=tam + "abs(a)";
+}
+function chen7()
+{
+  var tam = document.getElementById('noidung').value;
+  document.getElementById('noidung').value=tam + "sqrt(x)";
+}
+function chen8()
+{
+  var tam = document.getElementById('noidung').value;
+  document.getElementById('noidung').value=tam + "sin(x)";
+}
+function chen9()
+{
+  var tam = document.getElementById('noidung').value;
+  document.getElementById('noidung').value=tam + "log_{n}{a}";
+}
+function chen10()
+{
+  var tam = document.getElementById('noidung').value;
+  document.getElementById('noidung').value=tam + "1 usd sang vnd";
+}
+</script>
+<script>
+    $("#giaitoan").on('submit',(function(e) {
+      e.preventDefault();
+    	$.ajax({
+    		url: "api.getdata.php",
+        cache: true,
+        type: "POST",
+    		data:  new FormData(this),
+    		processData:false,
+        contentType: false,
+        beforeSend: function () {
+              $('#giai').text('Hệ thống đang xử lí! Xin chờ...').prop('disabled', true);
+                                },
+    		success: function(data) {
+          $('#giai').text('Xử lí').prop('disabled', false);
+          if (data == 'loisaidinhdang')
+          {
+            swal("Thất bại!", "Biểu thức bạn nhập sai định dạng", "error")
+          }
+          else if (data == 'khongtruyxuatduoc')
+          {
+            swal("Thất bại!", "Phép tính quá lớn hoặc không tìm thấy kết quả của truy vấn này", "error")
+          }
+          else
+          {
+              var trave = data;
+              obj = JSON.parse(trave);
+              var socachgiai=0;
+              var giaitoan=Uint16Array;
+              var devao=Array;
+              var copyketqua=new Array();
+              var text=Uint32Array;
+              text[0]='';text[1]='';text[2]='';text[3]='';text[4]='';text[5]='';text[6]='';text[7]='';text[8]='';text[9]='';text[10]='';// khai báo tránh undefined
+              for (var dem in obj.math.variants)
+              { socachgiai++;
+                for (var i in obj.math.variants[dem].solution[0].steps)
+                {//Xử lí lời giải
+                  text[socachgiai] += '<p>'+obj.math.variants[dem].solution[0].steps[i].text+':</p>'+'<img src="'+obj.math.variants[dem].solution[0].steps[i].img_url+'"/><hr>';
+                }
+              };
+              socachgiai=0;
+              for (var dem in obj.math.variants)
+                {
+                  for (var i in obj.math.variants[dem].answers)
+                  {//Xử lí đáp án, số đáp án, cách giải
+                  socachgiai++;
+                  devao[socachgiai]='<img src="'+obj.math.variants[dem].texUrl+'"/>';
+                  copyketqua[socachgiai]=obj.math.variants[dem].answers[i].replaced_formula;
+                  giaitoan[socachgiai]='<img src="'+obj.math.variants[dem].answers[i].answer_url+'"/>';
+                  }
+                };
+              var menucachgiai='';
+              var trinhbay='';
+              // if (socachgiai >1)
+                trinhbay +='<div class="tab-pane container active" id="loigiaitotnhat">'
+                            +'<b>Truy vấn: </b></br>' + devao[1] +'<hr>'
+                            + text[1] + '<p><u><b>Kết quả:</u></b></p>'+giaitoan[1]+
+                            '<hr>Copy kết quả (nếu có):</br><input class="form-control" readonly autofocus value="'+copyketqua[1]+'"/></div>';
+                menucachgiai +='<li class="nav-item"><a class="nav-link active" data-toggle="pill" href="#loigiaitotnhat">Xem kết quả</a></li>';
+                  for (var i =2; i<=socachgiai; i++)
+                  {
+                    trinhbay +='<div class="tab-pane container fade" id="loigiai'+i+'">'
+                                +'<b>Truy vấn: </b></br>' + devao[i] +'<hr>'
+                                +text[i]+'<p><u><b>Kết quả:</u></b></p>'+giaitoan[i]+
+                                '<hr>Copy kết quả (nếu có):</br><input class="form-control" readonly autofocus value="'+copyketqua[i]+'"/></div>';
+                    menucachgiai +='<li class="nav-item"><a class="nav-link" data-toggle="pill" href="#loigiai'+i+'">Kết quả khác</a></li>';
+                  };
+                  document.getElementById('loigiai').innerHTML= '<ul class="nav nav-pills">'+menucachgiai+'</ul>'+'<div class="tab-content">' + trinhbay+'</div>';
+                };
+    		}
+       });
+    }));
 
 </script>
-</html>
